@@ -17,10 +17,9 @@ NewCol(2) = C1;
 NewCol(3) = C1;
 
 NewCelledImage = mat2cell(CroppedImage,NewR,NewCol);
-
-
 %celldisp(NewCelledImage);
 %
+%subplot(3,3,1);
 %imshow(NewCelledImage{1,1});
 %subplot(3,3,2);
 %imshow(NewCelledImage{1,2});

@@ -1,5 +1,8 @@
-function [  ] = Test( x )
-%lableArray = [0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 5 5 6 6 6 6 6 6 6 6 6 6 7 7 7 7 7 7 7 7 7 7 8 8 8 8 8 8 8 8 8 8 9 9 9 9 9 9 9 9 9 9 ] ;
+function [x] = Test( x )
+ 
+load  'C:\Users\DELL\Desktop\Bayes Classifier\cov_matr' cov_matr;
+load  'C:\Users\DELL\Desktop\Bayes Classifier\mean_matr.mat' mean_matr;
+
 testedimage=imread(x);
 %fliped_Image=1-testedimage;
 %croped_Image = crop (fliped_Image);
@@ -21,24 +24,35 @@ for i=1:3
     end
 end
 
- load  'D:\FCI\Second term\Pattern\Assignments\Opera\Assignment #1 (Centroid)\Patt.assig#1\Feature.mat' y labels;
+% load  'C:\Users\DELL\Desktop\MSE\Feature.mat' Z labels;
+ 
+ [x,y]=size(cov_matr);
+ final=[];
+ counter = 1 ;
+ 
+ for i=1 :10
+ 
+     
+     S=((i-1)*18)+1;
+     cc = cov_matr(S:S+17 , :);
+     mm = mean_matr(counter , :);
+     
+     inv_cov = pinv(cc) ;
+     dx = (-1/2)*log(det(cc))-(1/2)* ((temp-mm) * inv_cov *(temp-mm)');
+     
+     final = [final,dx];
+     
+     counter = counter + 1 ;
+ end
+ 
+ 
+ final
+ [x , i]= max(final);
+ x
+ i-1 
+ 
+ 
 
-
-for i = 1:100
-    sum=0;
-    for j = 1:18
-        Difference = temp(j)-y(i,j) ;
-        Diff = abs(Difference);
-        sum = sum + Diff;
-    end
-    vector(i)=sum; 
-end
-
-[minimum,index] = min(vector);
-sort(vector)
-%val=find(minimum==vector);
-
-labels(index)
 end
 
 

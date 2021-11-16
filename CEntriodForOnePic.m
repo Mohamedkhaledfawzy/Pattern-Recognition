@@ -7,7 +7,6 @@ for i=1:3   % looping on the blocks of image
         var=t{i,j};
         verctor = regionprops(var,'centroid');
         VectorOfCentroid = cat ( 1,verctor.Centroid); %concatenate to get centroid specifically for ones
-        
         if size(VectorOfCentroid)==0
             temp(index : index+1)= [0,0];
         else
